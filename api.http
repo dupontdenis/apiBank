@@ -1,0 +1,31 @@
+# You need REST Client extension for VS Code to use this file
+# Download at https://aka.ms/vscode/rest-client
+
+
+POST http://localhost:5000/api/accounts/
+Content-Type: application/x-www-form-urlencoded
+
+user=superDupont&currency=euro&balance=500
+
+###
+
+GET http://localhost:5000/api/accounts/superDupont
+
+###
+
+DELETE http://localhost:5000/api/accounts/superDupont
+
+###
+
+POST http://localhost:5000/api/accounts/superDupont/transactions
+Content-Type: application/json
+
+{
+  "date": "2021-04-24",
+  "object": "Bought book",
+  "amount": -200
+}
+
+###
+
+DELETE http://localhost:5000/api/accounts/superDupont/transactions/9780d43fb0096163424534185f8e3116
