@@ -44,7 +44,7 @@ router
         return res.status(201).json(account);
     });
 
-// ------------------ACCOUNTUSER----------------------------
+// ------------------ACCOUNTS_USER----------------------------
 router
     .route('/accounts/:user')
 
@@ -77,7 +77,7 @@ router
         res.sendStatus(204);
     })
 
-// --------------------ACCOUNT_USER_TRANSACTIONS--------------------------
+// --------------------ACCOUNTS_USER_TRANSACTIONS--------------------------
 router
     .route('/accounts/:user/transactions')
     // Add a transaction to a specific account
