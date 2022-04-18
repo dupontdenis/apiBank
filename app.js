@@ -141,7 +141,6 @@ function updateDashboard() {
 
   updateElement('description', account.description);
   updateElement('balance', account.balance.toFixed(2));
-  updateElement('currency', account.currency);
 
   // Update transactions
   const transactionsRows = document.createDocumentFragment();

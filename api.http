@@ -5,7 +5,7 @@
 POST http://localhost:5000/api/accounts/
 Content-Type: application/x-www-form-urlencoded
 
-user=superDupont&currency=euro&balance=500
+user=superDupont&balance=500
 
 ###
 
