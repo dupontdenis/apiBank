@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const createAccount = (req, res) => {
     // Check mandatory request parameters
     if (!req.body.user) {
-        return res.status(400).json({ error: 'Missing parameters' });
+        return res.status(400).json({ error: 'user : Missing parameters' });
     }
 
     // Check if account already exists
@@ -67,7 +67,7 @@ const addTransaction = (req, res) => {
 
     // Check mandatory requests parameters
     if (!req.body.date || !req.body.object || !req.body.amount) {
-        return res.status(400).json({ error: 'Missing parameters' });
+        return res.status(400).json({ error: ' date/object.amount/ Missing parameters' });
     }
 
     // Convert amount to number if needed

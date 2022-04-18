@@ -27,6 +27,8 @@ function updateRoute() {
     return navigate('/dashboard');
   }
 
+  
+ 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
   const app = document.getElementById('app');
