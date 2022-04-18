@@ -170,18 +170,6 @@ function createTransactionRow(transaction) {
   return transactionRow;
 }
 
-function addTransaction() {
-  const dialog = document.getElementById('transactionDialog');
-  dialog.classList.add('show');
-
-  // Reset form
-  const transactionForm = document.getElementById('transactionForm');
-  transactionForm.reset();
-
-  // Set date to today
-  transactionForm.date.valueAsDate = new Date();
-}
-
 async function confirmTransaction() {
   const dialog = document.getElementById('transactionDialog');
   dialog.classList.remove('show');
