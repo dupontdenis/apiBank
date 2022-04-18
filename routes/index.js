@@ -1,6 +1,4 @@
 const express = require('express');
-const crypto = require('crypto');
-//const db = require('../models');
 const ctrlAccount = require('../controlers/account.js');
 
 
