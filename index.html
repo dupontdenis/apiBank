@@ -35,7 +35,7 @@
 
         <div class="row g-5">
           <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">login</h4>
+            <h4 class="mb-3">Login</h4>
             <form id="loginForm" action="javascript:login()" class="needs-validation was-validated" novalidate="">
               <div class="row g-3">
                 <div class="col-sm-6">
@@ -98,18 +98,19 @@
   <template id="dashboard">
     <section class="dashboard-page">
       <header class="dashboard-header">
-        <h1 class="dashboard-title hide-xs">test Banking</span>
-          <button onclick="logout()">Logout</button>
+        <h1 class="dashboard-title hide-xs">Test Banking</span>
+
       </header>
       <div class="row g-3">
         <div class="col-sm-6">
           <div class="transactions-title">
-            <h2 id="description"></h2>
+            <p id="description"></p>
+            Balance: <span id="balance"></span><span>€</span>
+            <button class="btn btn-warning" onclick="logout()">Logout</button>
           </div>
         </div>
-        <div class="col-sm-6">
-          Balance
-          <span id="balance"></span>€
+        <div class="col-sm-6 text-end">
+        
         </div>
       </div>
 
