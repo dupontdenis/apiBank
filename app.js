@@ -1,4 +1,10 @@
 // ---------------------------------------------------------------------------
+// Global state
+// ---------------------------------------------------------------------------
+
+let account= null;
+
+// ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
 
@@ -69,21 +75,8 @@ async function createTransaction(user, transaction) {
   return sendRequest('/accounts/' + user + '/transactions', 'POST', transaction);
 }
 
-// ---------------------------------------------------------------------------
-// Global state
-// ---------------------------------------------------------------------------
 
-let state = Object.freeze({
-  account: null
-});
 
-function updateState(property, newData) {
-  state = Object.freeze({
-    ...state,
-    [property]: newData
-  });
-  localStorage.setItem(storageKey, JSON.stringify(state.account));
-}
 
 // ---------------------------------------------------------------------------
 // Login/register
@@ -98,7 +91,7 @@ async function login() {
     return updateElement('loginError', data.error);
   }
 
-  updateState('account', data);
+  account = data;
   navigate('/dashboard');
 }
 
@@ -113,7 +106,7 @@ async function register() {
     return updateElement('registerError', result.error);
   }
 
-  updateState('account', result);
+  account = result;
   navigate('/dashboard');
 }
 
@@ -122,7 +115,7 @@ async function register() {
 // ---------------------------------------------------------------------------
 
 async function updateAccountData() {
-  const account = state.account;
+
   if (!account) {
     return logout();
   }
@@ -132,7 +125,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  account = data;
 }
 
 async function refresh() {
@@ -141,7 +134,7 @@ async function refresh() {
 }
 
 function updateDashboard() {
-  const account = state.account;
+
   if (!account) {
     return logout();
   }
@@ -189,7 +182,7 @@ async function confirmTransaction() {
 
   const formData = new FormData(transactionForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
-  const data = await createTransaction(state.account.user, jsonData);
+  const data = await createTransaction(account.user, jsonData);
 
   if (data.error) {
     return updateElement('transactionError', data.error);
@@ -197,11 +190,11 @@ async function confirmTransaction() {
 
   // Update local state with new transaction
   const newAccount = {
-    ...state.account,
-    balance: state.account.balance + data.amount,
-    transactions: [...state.account.transactions, data]
+    ...account,
+    balance: account.balance + data.amount,
+    transactions: [...account.transactions, data]
   }
-  updateState('account', newAccount);
+  account = newAccount;
 
   // Update display
   updateDashboard();
@@ -213,7 +206,7 @@ function cancelTransaction() {
 }
 
 function logout() {
-  updateState('account', null);
+
   navigate('/login');
 }
 
@@ -233,11 +226,6 @@ function updateElement(id, textOrNode) {
 
 function init() {
   // Restore state
-  const savedState = localStorage.getItem(storageKey);
-  if (savedState) {
-    updateState('account', JSON.parse(savedState));
-  } else {
-  }
 
   // Update route for browser back/next buttons
   window.onpopstate = () => updateRoute();

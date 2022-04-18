@@ -6,9 +6,9 @@ const db = {
       description: `Test account`,
       balance: 10000,
       transactions: [
-        { id: '2', date: '2022-04-03', object: 'Book', amount: -10 },
-        { id: '1', date: '2022-04-01', object: 'Book', amount: -50 },
-        { id: '3', date: '2022-04-04', object: 'MacDO', amount: -15 }
+        { id: '2', date: '2022-04-25', object: 'Book', amount: -10 },
+        { id: '1', date: '2022-04-25', object: 'Book', amount: -50 },
+        { id: '3', date: '2022-04-25', object: 'MacDO', amount: -15 }
       ],
     }
   };

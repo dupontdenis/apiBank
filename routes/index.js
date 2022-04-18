@@ -1,6 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
-// const db = require('../models');
+//const db = require('../models');
 const ctrlAccount = require('../controlers/account.js');
 
 
@@ -29,96 +29,13 @@ router
 router
     .route('/accounts/:user/transactions')
     // Add a transaction to a specific account
-    .post((req, res) => {
-        const account = db[req.params.user];
-
-        // Check if account exists
-        if (!account) {
-            return res.status(404).json({ error: 'User does not exist' });
-        }
-
-        // Check mandatory requests parameters
-        if (!req.body.date || !req.body.object || !req.body.amount) {
-            return res.status(400).json({ error: 'Missing parameters' });
-        }
-
-        // Convert amount to number if needed
-        let amount = req.body.amount;
-        if (amount && typeof amount !== 'number') {
-            amount = parseFloat(amount);
-        }
-
-        // Check that amount is a valid number
-        if (amount && isNaN(amount)) {
-            return res.status(400).json({ error: 'Amount must be a number' });
-        }
-
-        // Generates an ID for the transaction
-        const id = crypto
-            .createHash('md5')
-            .update(req.body.date + req.body.object + req.body.amount)
-            .digest('hex');
-
-        // Check that transaction does not already exist
-        if (account.transactions.some((transaction) => transaction.id === id)) {
-            return res.status(409).json({ error: 'Transaction already exists' });
-        }
-
-        // Add transaction
-        const transaction = {
-            id,
-            date: req.body.date,
-            object: req.body.object,
-            amount,
-        };
-        account.transactions.push(transaction);
-
-        // Update balance
-        account.balance += transaction.amount;
-
-        return res.status(201).json(transaction);
-    })
+    .post(ctrlAccount.addTransaction)
 
 // ----------------------------------------------
 router
     .route('/accounts/:user/transactions/:id')
     // Remove specified transaction from account
-    .delete((req, res) => {
-        const account = db[req.params.user];
-
-        // Check if account exists
-        if (!account) {
-            return res.status(404).json({ error: 'User does not exist' });
-        }
-
-        const nb_transactions =  account.transactions.length;
-
-        account.transactions = account.transactions.filter( ( transaction ) => {
-            console.table([account.balance,transaction.id,req.params.id,transaction.id == req.params.id])
-            if (transaction.id !== req.params.id) {
-                return true;
-            }
-            account.balance -= transaction.amount;
-        });
-
-        if (nb_transactions ==  account.transactions.length) {
-            return res.status(404).json({ error: 'Transaction does not exist' });
-        }
-
-        // const transactionIndex = account.transactions.findIndex(
-        //     (transaction) => transaction.id === req.params.id
-        // );
-
-        // // Check if transaction exists
-        // if (transactionIndex === -1) {
-        //     return res.status(404).json({ error: 'Transaction does not exist' });
-        // }
-
-        // // Remove transaction
-        // account.transactions.splice(transactionIndex, 1);
-
-        res.sendStatus(204);
-    });
+    .delete(ctrlAccount.deleteTransaction);
 
 // ***************************************************************************
 
