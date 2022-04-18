@@ -11,10 +11,5 @@ const db = {
       ],
     }
   };
-  
-  
-  console.log("db")
-
-
 
 module.exports = db;

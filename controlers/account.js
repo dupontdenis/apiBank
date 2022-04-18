@@ -106,7 +106,6 @@ const addTransaction = (req, res) => {
 
     return res.status(201).json(transaction);
 }
-
 const deleteTransaction = (req, res) => {
     const account = db[req.params.user];
 
@@ -143,7 +142,6 @@ const deleteTransaction = (req, res) => {
 
     res.sendStatus(204);
 }
-
 module.exports = {
     createAccount,
     getUserAccount,
