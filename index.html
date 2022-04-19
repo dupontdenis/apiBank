@@ -26,6 +26,8 @@
 
       <!-- Placeholder where we will insert our app HTML based on route -->
       <div id="app">Loading...</div>
+
+  <!--  page template -->
       <template id="login">
 
         <div class="py-5 text-center">
@@ -152,7 +154,7 @@
               <input id="amount" name="amount" type="number" value="0" step="any" required>
               <div id="transactionError" class="error" role="alert"></div>
               <div class="dialog-buttons">
-                <button class="button-alt" formaction="javascript:cancelTransaction()" formnovalidate>Cancel</button>
+                <button class="button-alt" type="reset">Cancel</button>
                 <button formaction="javascript:confirmTransaction()">OK</button>
               </div>
             </form>

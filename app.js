@@ -2,7 +2,7 @@
 // Constants
 // ---------------------------------------------------------------------------
 
-const serverUrl = 'http://localhost:5000/api';
+const serverUrl = 'http://localhost:5000/api/accounts';
 const storageKey = 'savedAccount';
 
 // ---------------------------------------------------------------------------
@@ -26,8 +26,6 @@ function updateRoute() {
   if (!route) {
     return navigate('/dashboard');
   }
-
-  
  
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
@@ -46,10 +44,10 @@ function updateRoute() {
 // API interactions
 // ---------------------------------------------------------------------------
 
-async function sendRequest(api, method, body) {
+async function sendRequest(api, method='GET', body) {
   try {
     const response = await fetch(serverUrl + api, {
-      method: method || 'GET',
+      method: method,
       headers: body ? { 'Content-Type': 'application/json' } : undefined,
       body
     });
@@ -60,15 +58,15 @@ async function sendRequest(api, method, body) {
 }
 
 async function getAccount(user) {
-  return sendRequest('/accounts/' + encodeURIComponent(user));
+  return sendRequest('/' + encodeURIComponent(user));
 }
 
 async function createAccount(account) {
-  return sendRequest('/accounts', 'POST', account);
+  return sendRequest('', 'POST', account);
 }
 
 async function createTransaction(user, transaction) {
-  return sendRequest('/accounts/' + user + '/transactions', 'POST', transaction);
+  return sendRequest('/' + user + '/transactions', 'POST', transaction);
 }
 
 // ---------------------------------------------------------------------------
@@ -171,8 +169,8 @@ function createTransactionRow(transaction) {
 }
 
 async function confirmTransaction() {
-  const dialog = document.getElementById('transactionDialog');
-  dialog.classList.remove('show');
+  // const dialog = document.getElementById('transactionDialog');
+  // dialog.classList.remove('show');
 
   const transactionForm = document.getElementById('transactionForm');
 
@@ -194,11 +192,6 @@ async function confirmTransaction() {
 
   // Update display
   updateDashboard();
-}
-
-function cancelTransaction() {
-  const dialog = document.getElementById('transactionDialog');
-  dialog.classList.remove('show');
 }
 
 function logout() {
@@ -225,7 +218,6 @@ function init() {
   const savedState = localStorage.getItem(storageKey);
   if (savedState) {
     updateState('account', JSON.parse(savedState));
-  } else {
   }
 
   // Update route for browser back/next buttons
