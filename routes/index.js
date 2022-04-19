@@ -7,13 +7,13 @@ const router = express.Router();
 
 // -------------------ACCOUNTs---------------------------
 router
-    .route('/accounts')
+    .route('/')
     // Create an account
     .post(ctrlAccount.createAccount);
 
 // ------------------ACCOUNTS_USER----------------------------
 router
-    .route('/accounts/:user')
+    .route('/:user')
 
     // Get all data for the specified account
     .get(ctrlAccount.getUserAccount)
@@ -25,13 +25,13 @@ router
 
 // --------------------ACCOUNTS_USER_TRANSACTIONS--------------------------
 router
-    .route('/accounts/:user/transactions')
+    .route('/:user/transactions')
     // Add a transaction to a specific account
     .post(ctrlAccount.addTransaction)
 
 // ----------------------------------------------
 router
-    .route('/accounts/:user/transactions/:id')
+    .route('/:user/transactions/:id')
     // Remove specified transaction from account
     .delete(ctrlAccount.deleteTransaction);
 

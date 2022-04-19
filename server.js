@@ -7,7 +7,7 @@ const router = require('./routes');
 
 // App constants
 const port = process.env.PORT || 5000;
-const apiPrefix = '/api';
+const apiPrefix = '/api/accounts';
 
 
 
