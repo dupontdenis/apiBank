@@ -2,7 +2,6 @@
 const db = {
     dupont: {
       user: 'dupont',
-      currency: 'Euro',
       description: `Test account`,
       balance: 10000,
       transactions: [
