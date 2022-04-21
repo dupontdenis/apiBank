@@ -58,7 +58,11 @@ async function sendRequest(api, method='GET', body) {
 }
 
 async function getAccount(user) {
-  return sendRequest('/' + encodeURIComponent(user));
+    if (user) {
+        return sendRequest('/' + encodeURIComponent(user));
+    } else {
+        return { error: 'fill the form, please' }
+    }
 }
 
 async function createAccount(account) {
@@ -90,11 +94,15 @@ function updateState(property, newData) {
 // ---------------------------------------------------------------------------
 
 async function login() {
+  
   const loginForm = document.getElementById('loginForm')
   const user = loginForm.user.value;
+
+  console.log(user=="");
   const data = await getAccount(user);
 
   if (data.error) {
+      
     return updateElement('loginError', data.error);
   }
 
@@ -106,7 +114,9 @@ async function register() {
   const registerForm = document.getElementById('registerForm');
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
+  console.log(data)
   const jsonData = JSON.stringify(data);
+  console.log(data)
   const result = await createAccount(jsonData);
 
   if (result.error) {
