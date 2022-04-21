@@ -12,7 +12,7 @@ router
     // Create an account
     .post((req, res) => {
         // Check mandatory request parameters
-        if (!req.body.user || !req.body.currency) {
+        if (!req.body.user) {
             return res.status(400).json({ error: 'Missing parameters' });
         }
 
@@ -33,7 +33,6 @@ router
         // Create account
         const account = {
             user: req.body.user,
-            currency: req.body.currency,
             description: req.body.description || `${req.body.user}'s budget`,
             balance: balance || 0,
             transactions: [],
