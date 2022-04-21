@@ -35,6 +35,9 @@ const createAccount = (req, res) => {
     return res.status(201).json(account);
 }
 const getUserAccount = (req, res) => {
+    if (!req.params.user) {
+        return res.status(400).json({ error: 'user : Missing parameters' });
+    }
     const account = db[req.params.user];
 
     // Check if account exists
