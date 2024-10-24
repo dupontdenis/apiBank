@@ -1,8 +1,20 @@
+## install packages
+```linux
+npm i
+```
+## launch server
+```linux
+npm run start
+```
+## launch another server in a SECOND terminal
+```linux
+npx http-server
+```
+
 ## API details
 
 Route                                        | Description
 ---------------------------------------------|------------------------------------
-GET    /api/                                 | Get server info
 POST   /api/accounts/                        | Create an account, ex: `{ user: 'me', description: 'My budget', balance: 1000 }`
 GET    /api/accounts/:user                   | Get all data for the specified account
 DELETE /api/accounts/:user                   | Remove specified account
